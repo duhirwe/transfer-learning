@@ -1,8 +1,31 @@
 ### Helper functions for image classification tasks
 
-import tensorflow as tf
+# View a random image
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import random
+
+def view_random_image(target_dir, target_class):
+    """
+    Takes in the target folder and class, returns a random image
+    """
+    target_folder = target_dir + target_class
+
+    # Get a random image path
+    random_image = random.sample(os.listdir(target_folder), 1)
+
+    # Read and plot the image
+    img = mpimg.imread(target_folder + "/" + random_image[0])
+    plt.imshow(img)
+    plt.title(target_class)
+    plt.axis("off")
+
+    print(f"Image shape: {img.shape}")
+
+    return img
 
 # Create a function to import an image and resize it to be able to be used with our model
+import tensorflow as tf
 def load_and_prep_image(filename, img_shape=224, scale=True):
   """
   Reads in an image from filename, turns it into a tensor and reshapes into
